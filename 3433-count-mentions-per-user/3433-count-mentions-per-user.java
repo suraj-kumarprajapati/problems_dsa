@@ -16,14 +16,14 @@ class Solution {
                 return t1-t2;
             }
             else {
-                // if(eType1.equals("MESSAGE") && eType2.equals("OFFLINE")) {
-                //     return 1;
-                // }
-                // else {
-                //     return 0;
-                // }
+                if(eType1.equals("MESSAGE") && eType2.equals("OFFLINE")) {
+                    return 1;
+                }
+                else {
+                    return -1;
+                }
 
-                return eType2.compareTo(eType1);
+                // return eType2.compareTo(eType1);
             }
         });
 
