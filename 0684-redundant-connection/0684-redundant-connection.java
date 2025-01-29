@@ -2,12 +2,85 @@ class Solution {
     public int[] findRedundantConnection(int[][] edges) {
         // return sol1(edges);
 
-        return sol2(edges);
+        // return sol2(edges);
+
+        return sol3(edges);
+    }
+
+
+    public int[] sol3(int[][] edges) {
+        int n = edges.length;
+
+        List<List<Integer>> adj = new ArrayList<>();
+        for(int i=0; i<=n; i++) {
+            adj.add(new ArrayList<>());
+        }
+
+        for(int[] edge : edges) {
+            int u = edge[0];
+            int v = edge[1];
+
+            adj.get(u).add(v);
+            adj.get(v).add(u);
+        }
+
+
+        int[] cycleStart = new int[] {-1};
+        int[] vis = new int[n+1];
+        int[] parent = new int[n+1];
+        Arrays.fill(parent, -1);
+
+        // find the starting node of the cycle and mark all the cyclic nodes by maintaing the parent of each cyclic node
+        DFS(1, adj, vis, parent, cycleStart);
+
+        // after finding the starting node of the cycle, add all the cyclic nodes into the hashset or hashmap by traversing the cycle once again
+        Set<Integer> set = new HashSet<>();
+        int node = cycleStart[0];
+        do {
+            set.add(node);
+            node = parent[node];
+        } while(node != cycleStart[0] );
+
+
+        // traverse each edge from right to left and check if both nodes of this edge is part of the cycle
+        // if yes, then this is the requried answer
+        for(int i=n-1; i>=0; i--) {
+            int[] edge = edges[i];
+            int u = edge[0];
+            int v = edge[1];
+
+            if(set.contains(u) && set.contains(v)) {
+                return new int[] {u, v};
+            }
+        }
+
+        // pseudo return
+        return new int[] {};
+    }
+    
+    // find the starting node and mark all nodes of cycle using DFS
+    public void DFS(int node, List<List<Integer>> adj, int[] vis, int[] parent, int[] cycleStart) {
+        vis[node] = 1;
+
+        for(int nei : adj.get(node)) {
+            if(vis[nei] == 0) {
+                parent[nei] = node;
+                DFS(nei, adj, vis, parent, cycleStart);
+            }
+            // if already visited, (since it's undirected graph) check if the
+            // eni is parent[node] or not
+            // if yes, then we have not found the start of the cycle
+            // if no && cycleStart = -1, then it is the start of the cycle
+            else if(nei != parent[node] && cycleStart[0] == -1) {
+                cycleStart[0] = nei;
+                parent[nei] = node;
+            }
+        }
     }
 
 
 
-
+    // time -> O(n^2), space -> O(n)
     public int[] sol2(int[][] edges) {
         int n = edges.length;
 
