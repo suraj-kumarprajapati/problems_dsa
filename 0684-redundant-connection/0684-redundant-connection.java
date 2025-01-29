@@ -25,7 +25,8 @@ class Solution {
             int u = edge[0];
             int v = edge[1];
 
-            // remove this edge from the adj list and check if cycle exists of not
+            
+            // remove this edge from the adj list and check if you can visit all the nodes or not
             adj.get(u).remove(Integer.valueOf(v));
             adj.get(v).remove(Integer.valueOf(u));
 
