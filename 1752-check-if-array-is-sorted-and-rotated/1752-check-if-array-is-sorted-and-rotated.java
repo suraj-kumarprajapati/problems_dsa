@@ -5,7 +5,7 @@ class Solution {
         if(n == 1)
             return true;
 
-        int count = 1;
+        int count = 0;
         for(int i=0; i<2*n; i++) {
             if(nums[i % n] <= nums[(i+1)%n]) {
                 count += 1;
