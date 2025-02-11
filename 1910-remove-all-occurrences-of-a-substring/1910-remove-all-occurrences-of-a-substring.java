@@ -1,6 +1,19 @@
 class Solution {
     public String removeOccurrences(String s, String part) {
-        return removeOccurencesUsingStack(s, part);
+        return removeOccurrencesBF(s, part);
+
+        // return removeOccurencesUsingStack(s, part);
+    }
+
+    public String removeOccurrencesBF(String s, String part) {
+        
+        while(s.contains(part)) {
+            int ind = s.indexOf(part);
+
+            s = s.substring(0, ind) + s.substring(ind + part.length());
+        }
+
+        return s;
     }
 
     public String removeOccurencesUsingStack(String s, String part) {
