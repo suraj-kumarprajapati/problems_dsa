@@ -1,6 +1,20 @@
 class Solution {
     public String findDifferentBinaryString(String[] nums) {
-        return sol1(nums);
+        // return sol1(nums);
+
+        return sol2(nums);
+    }
+
+
+    // cantor's diagonal argument
+    public String sol2(String[] nums) {
+        StringBuilder res = new StringBuilder();
+        for(int i=0; i<nums.length; i++) {
+            char ch = nums[i].charAt(i);
+            res.append(ch == '0' ? '1' : '0');
+        }
+
+        return res.toString();
     }
 
     public String sol1(String[] nums) {
