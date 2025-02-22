@@ -3,16 +3,13 @@ class Solution {
     int n;
     int k;
     int count = 0;
-    String res;
 
     public String getHappyString(int n, int k) {
         this.n = n;
         this.k = k;
         this.set = new char[] {'a', 'b', 'c'};
-        this.res = "";
 
         return generateHappyStrings(-1, new StringBuilder(), 1);
-
     }
 
     public String generateHappyStrings(int ind, StringBuilder str, int len) {
