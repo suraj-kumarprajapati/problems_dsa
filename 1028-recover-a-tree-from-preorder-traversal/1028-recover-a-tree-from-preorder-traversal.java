@@ -18,7 +18,61 @@ class Solution {
     int lastDashInd = -1;
 
     public TreeNode recoverFromPreorder(String traversal) {
-        return dfs(traversal, 0);
+        // // using recursion 
+        // return dfs(traversal, 0);
+
+
+        // iterative approach using stack
+        return recoverUsingStack(traversal);
+    }
+
+
+    public TreeNode recoverUsingStack(String traversal) {
+        int n = traversal.length();
+
+        Stack<TreeNode> stack = new Stack<>();
+        int ind = 0;
+
+        while(ind < n) {
+            // count the depth by counting the number of dashes
+            int depth = 0;
+            while(ind < n && traversal.charAt(ind) == '-') {
+                ind += 1;
+                depth += 1;
+            }
+
+
+            // generate the node value
+            int value = 0;
+            while(ind < n && traversal.charAt(ind) != '-') {
+                value = value*10 + (traversal.charAt(ind) - '0');
+                ind += 1;
+            }
+
+            // create a new node
+            TreeNode node = new TreeNode(value);
+
+            while(stack.size() > depth) {
+                stack.pop();
+            }
+
+            if(!stack.isEmpty()) {
+                if(stack.peek().left == null) {
+                    stack.peek().left = node;
+                }
+                else {
+                    stack.peek().right = node;
+                }
+            }
+
+            stack.push(node); 
+        }
+
+        while(stack.size() > 1) {
+            stack.pop();
+        }
+
+        return stack.pop();
     }
 
     public TreeNode dfs(String traversal, int level) {
