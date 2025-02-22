@@ -11,18 +11,17 @@ class Solution {
         this.set = new char[] {'a', 'b', 'c'};
         this.res = "";
 
-        generateHappyStrings(-1, new StringBuilder(), 1);
+        return generateHappyStrings(-1, new StringBuilder(), 1);
 
-        return res;
     }
 
-    public void generateHappyStrings(int ind, StringBuilder str, int len) {
+    public String generateHappyStrings(int ind, StringBuilder str, int len) {
         // base case
         if(len > n) {
             count += 1;
             if(count == k)
-                res = str.toString();;
-            return;
+                return str.toString();;
+            return "";
         }
 
         for(int i=0; i<set.length; i++) {
@@ -31,12 +30,15 @@ class Solution {
                 char ch = set[i];
                 str.append(ch);
                 // call the recursive function
-                generateHappyStrings(i, str, len + 1);
+                String s = generateHappyStrings(i, str, len + 1);
+                if(!s.equals(""))
+                    return s;
                 // backtrack
                 str.deleteCharAt(str.length() - 1);
             }
         }
 
+        return "";
     }
 
 }
