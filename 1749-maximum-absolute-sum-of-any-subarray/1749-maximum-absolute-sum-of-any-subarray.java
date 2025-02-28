@@ -11,6 +11,7 @@ class Solution {
 
         int max2 = findMaxSubSum(nums);
 
+        // recover the original array
         for(int i=0; i<n; i++) {
             nums[i] = -1*nums[i];
         }
