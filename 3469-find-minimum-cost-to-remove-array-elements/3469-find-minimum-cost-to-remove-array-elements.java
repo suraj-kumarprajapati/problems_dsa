@@ -2,6 +2,7 @@ class Solution {
     int[][] dp;
 
     public int minCost(int[] nums) {
+
         dp = new int[1001][1001];
         Arrays.stream(dp).forEach(row -> Arrays.fill(row, -1));
         return solve(nums, 1, 0);
