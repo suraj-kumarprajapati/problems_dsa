@@ -19,7 +19,7 @@ class Solution {
         
         // if ans == 4, then n = 4^k * (8*m + 7)
         int N = n;
-        while(N > 0) {
+        while(N%4 == 0) {
             N = N / 4;
         }
 
