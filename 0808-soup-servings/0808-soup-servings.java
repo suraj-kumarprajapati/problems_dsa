@@ -8,7 +8,7 @@ class Solution {
                 return 1;
         }
 
-        return prob(m, m, new HashMap<String, Double>());
+        return prob(m, m, memo);
     }
 
     public double prob(int i, int j, Map<String, Double> memo) {
