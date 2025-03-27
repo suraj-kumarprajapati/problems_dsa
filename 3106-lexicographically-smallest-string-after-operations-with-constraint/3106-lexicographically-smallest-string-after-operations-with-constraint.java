@@ -29,13 +29,21 @@ class Solution {
             }
 
             
-            if(min1 < min2) {
-                k = k - dist1;
-                str.append((char) (min1 + 'a'));
+             // Get the resulting characters after rotation
+            char char1 = (char) (min1 + 'a');
+            char char2 = (char) (min2 + 'a');
+
+            // Compare the lexicographically smaller character
+            if (min1 < min2) {
+                k -= dist1;
+                str.append(char1);
+            } else if(min1 > min2) {
+                k -= dist2;
+                str.append(char2);
             }
             else {
-                k = k - dist2;
-                str.append((char) (min2 + 'a'));
+                str.append(char1);
+                k -= Math.min(dist1, dist2);
             }
         }
 
