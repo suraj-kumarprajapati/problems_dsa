@@ -1,6 +1,38 @@
 class Solution {
     public String getSmallestString(String s, int k) {
-        StringBuilder str = new StringBuilder();
+    //    return sol1(s, k);
+
+        return sol2(s, k);
+    }
+
+    public String sol2(String s, int k) {
+         StringBuilder str = new StringBuilder();
+
+        int n = s.length();
+        for(int i=0; i<n; i++) {
+            char ch = s.charAt(i);
+
+            int cost1 = (ch - 'a');
+            int cost2 = ('z' - ch + 1);
+            int minCostToA = Math.min(cost1, cost2);
+
+            if(k >= minCostToA) {
+                str.append('a');
+                k -= minCostToA;
+            }
+            else {
+                char c = (char) (ch - k);
+                str.append(c);
+                k = 0;
+            }
+        }
+
+        return str.toString();
+    }
+
+
+    public String sol1(String s, int k) {
+         StringBuilder str = new StringBuilder();
 
         int n = s.length();
         for(int i=0; i<n; i++) {
