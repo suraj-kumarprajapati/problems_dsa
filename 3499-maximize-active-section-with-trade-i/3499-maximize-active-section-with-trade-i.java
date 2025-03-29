@@ -1,7 +1,54 @@
 class Solution {
     public int maxActiveSectionsAfterTrade(String s) {
+        // return sol1(s);
 
-        s = '1' + s + '1';
+        return sol2(s);
+    }
+
+    public int sol2(String s) {
+        int n = s.length();
+
+        // to store ans
+        int ans = 0;
+        for(int i=0; i<n; i++) {
+            if(s.charAt(i) == '1')
+                ans += 1;
+        }
+
+        // to store the left portion zeroes
+        int z1 = 0;
+
+        // to store the maximum conversions possible in one trade
+        int maxDelta = 0;
+
+        int i = 0;
+        while(i < n) {
+            int ones = 0;
+            int z2 = 0;
+
+            while(i < n && s.charAt(i) == '1') {
+                ones += 1;
+                i += 1;
+            }
+
+            while(i < n && s.charAt(i) == '0') {
+                z2 += 1;
+                i += 1;
+            }
+
+            if(z1 >= 1 && ones >= 1 && z2 >= 1) {
+                maxDelta = Math.max(maxDelta, z1 + z2);
+            }
+
+            z1 = z2;
+        }
+
+        return ans + maxDelta;
+        
+    }
+
+    public int sol1(String s) {
+         s = '1' + s + '1';
 
         int n = s.length();
 
