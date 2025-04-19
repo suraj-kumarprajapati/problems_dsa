@@ -2,7 +2,34 @@ class Solution {
     public long countFairPairs(int[] nums, int lower, int upper) {
         // return sol1(nums, lower, upper);
 
-        return sol2(nums, lower, upper);
+        // return sol2(nums, lower, upper);
+
+        return sol3(nums, lower, upper);
+    }
+
+    public long sol3(int[] nums, int lower, int upper) {
+        Arrays.sort(nums);
+        return lowerBound(nums, upper + 1) - lowerBound(nums, lower);
+    }
+
+    public long lowerBound(int[] nums, int value) {
+        int n = nums.length;
+        int l = 0;
+        int r = n-1;
+        long ans = 0;
+        while(l < r) {
+            int sum = nums[l] + nums[r];
+
+            if(sum < value) {
+                ans += r - l;
+                l += 1;
+            }
+            else {
+                r = r - 1;
+            }
+        }
+
+        return ans;
     }
 
     public long sol2(int[] nums, int lower, int upper) {
