@@ -14,23 +14,21 @@ class Solution {
         for(int i=0; i<n; i++) {
             int curr = nums[i];
 
-            int lowerInd = findLowerInd(nums, curr, lower);
-            int upperInd = findUpperInd(nums, curr, upper);
+            int lowerInd = findLowerInd(nums, curr, lower, i);
+            int upperInd = findUpperInd(nums, curr, upper, i);
 
             if(lowerInd != -1 && upperInd != -1 && lowerInd <= upperInd) {
                 count += (long) (upperInd - lowerInd + 1);
-                if(i >= lowerInd && i <= upperInd)
-                    count -= 1;
             }
         }
 
-        return count / 2;
+        return count;
     }
 
-    private int findLowerInd(int[] nums, int curr, int lower) {
+    private int findLowerInd(int[] nums, int curr, int lower, int i) {
         int n = nums.length;
 
-        int l = 0;
+        int l = i+1;
         int u = n-1;
         int ans = -1;
         while(l <= u) {
@@ -50,10 +48,10 @@ class Solution {
     }
 
 
-    private int findUpperInd(int[] nums, int curr, int upper) {
+    private int findUpperInd(int[] nums, int curr, int upper, int i) {
         int n = nums.length;
 
-        int l = 0;
+        int l = i+1;
         int u = n-1;
         int ans = -1;
         while(l <= u) {
