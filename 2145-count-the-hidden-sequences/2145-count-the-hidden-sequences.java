@@ -14,6 +14,6 @@ class Solution {
                 return 0;
         }
 
-        return  (upper - lower) - (maxCumm - minCumm) + 1;
+        return  upper - (maxCumm - minCumm) - lower + 1;
     }
 }
