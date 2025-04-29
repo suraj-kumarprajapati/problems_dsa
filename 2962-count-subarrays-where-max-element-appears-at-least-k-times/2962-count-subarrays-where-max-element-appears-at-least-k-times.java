@@ -8,25 +8,22 @@ class Solution {
             max = Math.max(max, num);
         }
 
-        List<Integer> indices = new ArrayList<>();
-        for(int i=0; i<n; i++) {
-            if(nums[i] == max) {
-                indices.add(i);
-            }
-        }
-
-        int m = indices.size();
-        if(m < k)
-            return 0;
-
+        int cnt = 0;
         int i = 0;
-        int j = k-1;
-        while(j < m) {
-            ans += (long) (indices.get(i) + 1);
-            j += 1;
-            i += 1;
+        for(int j=0; j<n; j++) {
+            if(nums[j] == max)
+                cnt += 1;
+
+            while(cnt == k) {
+                if(nums[i] == max) {
+                    cnt -= 1;
+                }
+                i += 1;
+            }
+
+            ans += (long) (i);
         }
 
-        return ans;
+        return ans;        
     }
 }
