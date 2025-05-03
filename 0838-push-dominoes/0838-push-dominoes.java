@@ -24,24 +24,21 @@ class Solution {
 
             if(nextL[i] == n) {
                 arr[i] = 'R';
+
             }
-            
-            if(prevR[i] == -1) {
+            else if(prevR[i] == -1) {
                 arr[i] = 'L';
             }
+            else {
+                int distL = nextL[i] - i ;
+                int distR = i - prevR[i] ;
 
-            int distL = nextL[i] - i ;
-            int distR = i - prevR[i] ;
-
-            if(distL > distR) {
-                
+                if(distL > distR) {
                     arr[i] = 'R';
-                
-            }
-            else if(distL < distR) {
-               
+                }
+                else if(distL < distR) {
                     arr[i] = 'L';
-                
+                }
             }
         }
 
