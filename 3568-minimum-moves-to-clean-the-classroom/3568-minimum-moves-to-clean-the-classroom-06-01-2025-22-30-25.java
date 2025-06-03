@@ -32,7 +32,7 @@ class Solution {
 
         
         Queue<int[]> q = new LinkedList<>();
-        // {sr, sc, litterMask, enery, level}
+        // {sr, sc, litterMask, energy, level}
         q.add(new int[] {sr, sc, 0, energy, 0});
         vis[sr][sc][0][energy] = 1;
       
