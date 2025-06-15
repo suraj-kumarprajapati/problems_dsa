@@ -3,25 +3,38 @@ class Solution {
         
 
         
-        int x1 = 0; // left most digit
-        int x2 = 0; // in case left most digit is already 1 
+        int leftMostDigit = -1; // left most digit
+        int leftMostSecondMaxDigit = -1; // in case left most digit is already 9
+        int leftMostSecondMinDigit = -1; // in case left most digit is alreay 1 (non zero)
         int temp = num;
-        int y1 = 9;
-        int y2 = 1;
         while(temp > 0) {
             int rem = temp % 10;
-            x1 = rem;
-            if(x1 != 1 && x1 != 0)
-                x2 = x1;
+            leftMostDigit = rem;
+
+            if(rem != 9) 
+                leftMostSecondMaxDigit = rem;
+
+            if(rem != 1 && rem != 0)
+                leftMostSecondMinDigit = rem;
+
             temp = temp / 10;
         }
 
-        if(x1 == 1) {
+        // for max number -> x1, y1
+        // for min number -> x2, y2
+        int x1 = leftMostDigit;  
+        int x2 = leftMostDigit; // for min number
+        int y1 = 9;
+        int y2 = 1;
+
+        if(leftMostDigit == 9) {
+            x1 = leftMostSecondMaxDigit;
+        }
+        else if(leftMostDigit == 1) {
+            x2 = leftMostSecondMinDigit;
             y2 = 0;
         }
-        else {
-            x2 = x1;
-        }
+
 
         // apply operations on num to get max and min possible number
         // for max -> replace the leftmost digit to 9
